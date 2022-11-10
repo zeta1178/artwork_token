@@ -1,26 +1,19 @@
-pragma solidity ^0.5.5
+// SPDX-License-Identifier: Mike Cruz  
+pragma solidity ^0.5.0;
 
+import "/home/ubuntu/artwork_token/contracts/openzeppelin-contracts-release-v2.5.0/contracts/token/ERC721/ERC721Full.sol";
 
-// import "https://github.com/OpenZeppelin/openzeppelin-contracts/blob/release-v2.5.0/contracts/token/ERC721/ERC721Full.sol";
+contract ArtToken is ERC721Full {
+    constructor() public ERC721Full("ArtToken", "ART") {}
 
-// import "token/ERC721Full.sol"
-// import "./openzeppelin-contracts-release-v2.5.0/contracts/token/ERC721/ERC721Full.sol";
+    function registerArtwork(address owner, string memory tokenURI)
+        public
+        returns (uint256)
+    {
+        uint256 tokenId = totalSupply();
+        _mint(owner, tokenId);
+        _setTokenURI(tokenId, tokenURI);
 
-contract ArtToken {
-
-};
-
-// contract ArtToken is ERC721Full {
-//     constructor() public ERC721Full("ArtToken", "ART") {}
-
-//     function registerArtwork(address owner, string memory tokenURI)
-//         public
-//         returns (uint256)
-//     {
-//         uint256 tokenId = totalSupply();
-//         _mint(owner, tokenId);
-//         _setTokenURI(tokenId, tokenURI);
-
-//         return tokenId;
-//     }
-// }
+        return tokenId;
+    }
+}
